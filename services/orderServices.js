@@ -6,6 +6,9 @@ const addOrder = async (
     totalAmount,
     status,
     address,
+    soldBy,
+    estimatedDeliveryDate,
+    status,
     createdAt,
 ) => {
     const order = new Order({
@@ -14,6 +17,9 @@ const addOrder = async (
         totalAmount,
         status,
         address,
+        soldBy,
+        estimatedDeliveryDate,
+        status,
         createdAt,
     });
 

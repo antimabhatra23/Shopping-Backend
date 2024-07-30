@@ -21,7 +21,7 @@ const login = async (email, password) => {
   }
 
   const token = jwt.sign({ id: user._id }, "ANTIMA_SECERET", { expiresIn: '1h' });
-  return { message: 'Login successful', token , user };
+  return { message: 'Login successful', token, userId: user._id };
 };
 
 module.exports = {

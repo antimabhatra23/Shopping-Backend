@@ -12,6 +12,8 @@ const orderSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
   status: { type: String, default: 'Pending' },
   address: {type: String, required: true},
+  soldBy: { type: String, required: true },  // Add soldBy field
+  estimatedDeliveryDate: { type: Date, required: true }, 
   createdAt: { type: Date, default: Date.now }
 });
 
