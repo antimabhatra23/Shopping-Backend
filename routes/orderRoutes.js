@@ -36,7 +36,11 @@ router.post('/', async (req, res) => {
 // Get all orders for admin
 router.get('/', async (req, res) => {
   try {
-    const orders = await Order.find(); // Await the query
+    const orders = await Order.find().populate('userId', 'name email phone').populate({
+      path: 'items.productId',
+      select: 'name price img', // Include imageUrl in the response
+    }); // Await the query
+
     res.status(200).json(orders); // Use 200 status code for successful GET request
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -47,7 +51,10 @@ router.get('/', async (req, res) => {
 router.get('/user/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
-    const orders = await Order.find({ userId: userId }); // Await the query
+    const orders = await Order.find({ userId: userId }).populate({
+      path: 'items.productId',
+      select: 'name price img', // Include imageUrl in the response
+    }).sort({ createdAt: -1 }); // Await the query
     res.status(200).json(orders); // Use 200 status code for successful GET request
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -68,5 +75,6 @@ router.get('/order/:orderId', async (req, res) => { // Fixed endpoint path
     res.status(400).json({ message: error.message });
   }
 });
+
 
 module.exports = router;
